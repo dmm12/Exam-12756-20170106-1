@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.dao.FilmDao">
+	<resultMap id="BaseResultMap" type="com.ssm.pojo.Film">
+		<id column="film_id" property="film_id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		film_id, title, description, name
+	</sql>
+	
+	<!--不是分页的数据-->
+	<select id="selectFileList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select f.film_id,f.title,f.description,l.`name` from film f,`language` l
+		where f.language_id = l.language_id LIMIT #{id,jdbcType=INTEGER},10;
+	</select>
+	
+	<!--查询所有的数据 -->
+	<select id="selectFilmList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select f.film_id,f.title,f.description,l.`name` from film f,`language` l
+		where f.language_id = l.language_id 
+	</select>
+	
+	<!-- 查找数据 -->
+	<select id="selectById" resultMap="BaseResultMap">
+		select f.film_id,f.title,f.description,l.`name` from film f,`language` l
+		where f.language_id = l.language_id and f.film_id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<resultMap id="selectResultMap" type="com.ssm.pojo.User">
+		<id column="customer_id" property="id" jdbcType="INTEGER"/>
+		<result column="first_name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!--登录-->
+	<select id="selectUsername"  resultMap="selectResultMap">
+		select first_name from customer where first_name = #{name,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 插入数据 -->
+	<insert id="insertList" parameterType="com.ssm.pojo.Film" >
+    insert into film
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="languageId != null" >
+        language_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="languageId != null" >
+        #{languageId,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+	<!-- 批量删除的sql -->
+	    <delete id="delete" parameterType="list">
+            delete from film where film_id in
+        <foreach collection="list" item="item"  index="index" open="(" separator="," close=")">  
+            #{item}
+         </foreach>
+    </delete>
+    <!-- 修改 -->
+    <update id="updateSelective" parameterType="com.ssm.pojo.Film" >
+   	 update film  set title = #{title,jdbcType=VARCHAR},language_id = #{languageId,jdbcType=TINYINT}, 
+    	description = #{description,jdbcType=LONGVARCHAR} where film_id=#{film_id}
+  	</update>
+  
+</mapper>

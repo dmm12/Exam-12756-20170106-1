@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="script/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="script/index.js"></script>
+<script type="text/javascript" src="script/showlistNew.js"></script>
+<script type="text/javascript" src="script/show.js"></script>
+<link rel="stylesheet" type="text/css" href="css/showlist.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css"  href="script/jquery-easyui-1.5.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"  href="script/jquery-easyui-1.5.1/demo/demo.css">
+<link rel="stylesheet" type="text/css"  href="script/jquery-easyui-1.5.1/themes/icon.css">
+<script type="text/javascript" src="script/jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="script/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+</head>
+<body style="margin: 0 auto">
+			<p>success!</p>
+			<div id="input" style="padding: 10px;width:300px">
+			<input id="productid" style="line-height:26px;border:1px solid #ccc">
+				<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doserch()">Search</a>
+			</div>
+			
+			<!-- dategridtable框-->
+			<table id="datagridTable" class="datagrid">
+				<thead>
+					<tr></tr>
+				</thead>
+			</table>
+
+			<div id="tb">
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"  id="btn_add">Add</a> 
+				<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" id="btn_delete">delete</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" id="btn_alert">edit</a>
+			</div>
+			<!-- 弹出框-->
+			<div id="dd" class="easyui-dialog" style=" padding: 10px 20px" closed="true"
+				buttons="#dlg-buttons">
+				<div class="ftitle">Input Film Information</div>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film名称:</label> 
+						<input size="40" name="title" id="title" class="easyui-validatebox">
+					</div>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film描述:</label> 
+						<input size="40" name="description" id="description" class="easyui-validatebox">
+					</div>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film语言:</label> 
+						<select class="easyui-validatebox" style="width:120px;" id="selectLanguage">
+							<option selected="selected" value="1">English</option>
+							<option value="2">Italian</option>
+							<option value="3">Japanese</option>
+							<option value="4">Mandarin</option>
+							<option value="5">French</option>
+							<option value="6">German</option>
+						</select>
+					</div>
+			</div>
+
+			<!-- 工具栏-->
+			<div id="dlg-buttons">
+				<a href="#" class="easyui-linkbutton" id="tool_save">Save</a> 
+				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#dd').dialog('close')">Close</a>
+			</div>
+			
+			<!-- 弹出框-->
+			<div id="da" class="easyui-dialog" style=" padding: 10px 20px" closed="true" buttons="#dlg-button">
+				<div class="ftitle">Input Film Information</div>
+				<form id="fm" method="post" novalidate>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film名称:</label> 
+						<input size="40" name="title1" id="title1" class="easyui-validatebox">
+					</div>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film描述:</label> 
+						<input size="40" name="description1" id="description1" class="easyui-validatebox">
+					</div>
+					<div class="fitem" style="margin-top: 10px">
+						<label>film语言:</label> 
+						<select class="easyui-validatebox" style="width:120px;" id="selectLanguage1">
+							<option selected="selected" value="1">English</option>
+							<option value="2">Italian</option>
+							<option value="3">Japanese</option>
+							<option value="4">Mandarin</option>
+							<option value="5">French</option>
+							<option value="6">German</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<!-- 修改工具栏-->
+			<div id="dlg-button">
+				<a href="#" class="easyui-linkbutton" id="tool_post">post</a> 
+				<a href="javascript:void(0)" class="easyui-linkbutton" onclick="javascript:$('#da').dialog('close')">Close</a>
+			</div>
+			
+</body>
+</html>
